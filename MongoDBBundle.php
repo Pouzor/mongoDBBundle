@@ -4,7 +4,7 @@ namespace Pouzor\MongoDBBundle;
 
 
 use Pouzor\MongoDBBundle\DependencyInjection\Compiler\MongoTypeTransformer;
-use Pouzor\MongoDBBundle\DependencyInjection\Mongo32Extension;
+use Pouzor\MongoDBBundle\DependencyInjection\MongoDBExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -22,7 +22,7 @@ class MongoDBBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        
+
         $container->addCompilerPass(new MongoTypeTransformer());
     }
 }

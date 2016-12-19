@@ -397,6 +397,30 @@ class Repository
     }
 
     /**
+     * Update many documents at the same time
+     *
+     * @param array $where
+     * @param array $modifications
+     * @param array $options
+     * @return \MongoDB\UpdateResult
+     */
+    public function replaceOne(array $where = [], array $modifications = [], array $options = [])
+    {
+
+        $this->logger->info(
+            'Replace one ',
+            [
+                'where' => $where,
+                'update' => $modifications,
+                'col' => $this->name,
+            ]
+        );
+
+        return $this->collection->replaceOne($where, $modifications, $options);
+    }
+
+
+    /**
      * @param $id
      * @param array $options
      * @return \MongoDB\DeleteResult
@@ -631,7 +655,7 @@ class Repository
      */
     public function count(array $filter = [], array $options = [])
     {
-        
+
         $options += ['socketTimeoutMS' => -1];
 
         $this->logger->info(

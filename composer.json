@@ -14,7 +14,8 @@
     "psr-4": { "Pouzor\\MongoDBBundle\\": "" }
   },
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "mongodb/mongodb" : "^1.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",

@@ -1,0 +1,20 @@
+{
+  "name": "pouzor/mongoDBBundle",
+  "description": "Bundle with new Mongo 3.2 version driver",
+  "license": "proprietary",
+  "type": "symfony-bundle",
+  "autoload": {
+    "psr-4": {
+      "Pouzor\\MongoDBBundle\\": "Pouzor/MongoDBBundle/"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "mongodb/mongodb": ">=1.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "phpunit/phpunit-skeleton-generator": "~2.0",
+    "phpunit/php-invoker": "~1.0"
+  }
+}

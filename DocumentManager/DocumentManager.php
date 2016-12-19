@@ -53,13 +53,13 @@ class DocumentManager
     public function __construct(array $configuration = array(), LoggerInterface $logger = null)
     {
         /**
-        host:          %mongo_host%
-        port:          %mongo_port%
-        db:            %mongo_database%
-        password:      %mongo_password%
-        username:      %mongo_user%
-        schema:        "%kernel.root_dir%/config/mongo/default.yml"
-        options:       ~
+         * host:          %mongo_host%
+         * port:          %mongo_port%
+         * db:            %mongo_database%
+         * password:      %mongo_password%
+         * username:      %mongo_user%
+         * schema:        "%kernel.root_dir%/config/mongo/default.yml"
+         * options:       ~
          */
 
         $this->validateConfiguration($configuration);
@@ -68,28 +68,32 @@ class DocumentManager
 
         $dsn = null;
 
-        if($configuration['username']){
-            $dsn = sprintf('mongodb://%s:%s@%s:%s/%s',
+        if ($configuration['username']) {
+            $dsn = sprintf(
+                'mongodb://%s:%s@%s:%s/%s',
                 $configuration['username'],
                 $configuration['password'],
                 $configuration['host'],
                 $configuration['port'],
                 $configuration['db']
             );
-        }else{
-            $dsn = sprintf('mongodb://%s:%s/%s',
+        } else {
+            $dsn = sprintf(
+                'mongodb://%s:%s/%s',
                 $configuration['host'],
                 $configuration['port'],
                 $configuration['db']
             );
         }
 
-        $this->client = new Client($dsn, $configuration['options'], [
+        $this->client = new Client(
+            $dsn, $configuration['options'], [
             'typeMap' => [
                 'root' => 'array',
                 'document' => 'array'
             ],
-        ]);
+        ]
+        );
 
         $this->database = $this->client->selectDatabase($configuration['db']);
 
@@ -110,8 +114,7 @@ class DocumentManager
      */
     public function getRepository($name)
     {
-        if(!array_key_exists($name, $this->repositories))
-        {
+        if (!array_key_exists($name, $this->repositories)) {
             /**
              * lazy creation
              */
@@ -121,8 +124,9 @@ class DocumentManager
                 $this->transformers
             );
 
-            if(isset($this->configuration['schema'][$name]['indexes']))
-            $repo->setIndexes($this->configuration['schema'][$name]['indexes']);
+            if (isset($this->configuration['schema'][$name]['indexes'])) {
+                $repo->setIndexes($this->configuration['schema'][$name]['indexes']);
+            }
 
             $this->repositories[$name] = $repo;
         }
@@ -148,9 +152,12 @@ class DocumentManager
      */
     public function removeAll($collectionName, array $filter = [])
     {
-        return $this->getRepository($collectionName)->deleteMany($filter, [
-            Query::NO_CURSOR_TIMEOUT
-        ]);
+        return $this->getRepository($collectionName)->deleteMany(
+            $filter,
+            [
+                Query::NO_CURSOR_TIMEOUT
+            ]
+        );
     }
 
     /**
@@ -171,20 +178,21 @@ class DocumentManager
         /**
          * validating keys
          */
-        foreach(['host', 'port', 'db', 'password', 'username', 'schema', 'options'] as $key)
-        {
-            if(!array_key_exists($key, $configuration)){
+        foreach (['host', 'port', 'db', 'password', 'username', 'schema', 'options'] as $key) {
+            if (!array_key_exists($key, $configuration)) {
                 throw new \Exception(sprintf('%s must be present in configuration', $key));
             }
         }
 
-        foreach(['host', 'db'] as $key)
+        foreach (['host', 'db'] as $key) {
+            if (!is_string($configuration[$key]) || empty($configuration[$key])) {
+                throw new \Exception(sprintf('%s must be a not empty string', $key));
+            }
+        }
 
-        if(!is_string($configuration[$key]) || empty($configuration[$key]))
-            throw new \Exception(sprintf('%s must be a not empty string', $key));
-
-        if(!is_integer($configuration['port']))
+        if (!is_integer($configuration['port'])) {
             throw new \Exception(sprintf('%s must be an integer', 'port'));
+        }
 
     }
 
@@ -195,8 +203,7 @@ class DocumentManager
      */
     public function buildIndexes($rebuild = false, $callback = null)
     {
-        foreach($this->configuration['schema'] as $col => $conf)
-        {
+        foreach ($this->configuration['schema'] as $col => $conf) {
             $this->getRepository($col)->buildIndexes($rebuild, $callback);
         }
     }

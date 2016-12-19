@@ -1,11 +1,18 @@
 {
-  "name": "pouzor/mongoDBBundle",
+  "name": "Pouzor/mongodbbundle",
   "description": "Bundle with new Mongo 3.2 version driver",
   "license": "proprietary",
   "type": "symfony-bundle",
+  "keywords": ["mongo", "mongodb"],
+  "authors": [
+    {
+      "name": "Pouzor",
+      "email": "remy.jardinet@gmail.com"
+    }
+  ],
   "autoload": {
-    "psr-4": {
-      "Pouzor\\MongoDBBundle\\": "Pouzor/MongoDBBundle/"
+    "autoload": {
+      "psr-4": { "Pouzor\\MongoDBBundle\\": "" }
     }
   },
   "require": {

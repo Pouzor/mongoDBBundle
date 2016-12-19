@@ -11,9 +11,7 @@
     }
   ],
   "autoload": {
-    "autoload": {
-      "psr-4": { "Pouzor\\MongoDBBundle\\": "" }
-    }
+    "psr-4": { "Pouzor\\MongoDBBundle\\": "" }
   },
   "require": {
     "php": ">=5.4.0"

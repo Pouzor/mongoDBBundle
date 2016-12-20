@@ -7,7 +7,7 @@ MongoDB Bundle allow to declare and handle multiple connections using configurat
 
 It use mongodb.so + https://github.com/mongodb/mongo-php-library
 
-1.  [Installation + configuration] (Resources/doc/index.md).
+1.  [Installation + configuration] (Resources/doc/install.md).
     Documentation about installation and configuration features.
 
 2.  [How to use] (Resources/doc/how-to-use.md).

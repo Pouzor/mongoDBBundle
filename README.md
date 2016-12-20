@@ -10,11 +10,5 @@ It use mongodb.so + https://github.com/mongodb/mongo-php-library
 1.  [Installation + configuration] (Resources/doc/index.md).
     Documentation about installation and configuration features.
 
-2.  [Repositories] (Resources/doc/repositories.md).
-    Declare and use repositories for managing collections.
-
-3.  [ParamConverters] (Resources/doc/param_converter.md).
-    Use parameter converters together with api features for handling urls.
-    
-4.  [How to use] (Resources/doc/usage.md).
-    Use parameter converters together with api features for handling urls.    
+2.  [How to use] (Resources/doc/how-to-use.md).
+    How to use mongodbbundle in your symfony project   

@@ -14,4 +14,9 @@ It use mongodb.so + https://github.com/mongodb/mongo-php-library
     Documentation about installation and configuration features.
 
 2.  [How to use] (Resources/doc/how-to-use.md).
-    How to use mongodbbundle in your symfony project   
+    How to use mongodbbundle in your symfony project
+    
+    
+### Contribution
+    
+Thx to Ibrael Espinosa for the huge contribution to this bundle.

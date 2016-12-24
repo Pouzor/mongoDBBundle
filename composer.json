@@ -1,7 +1,7 @@
 {
-  "name": "Pouzor/mongodbbundle",
-  "description": "Bundle with new Mongo 3.2 version driver",
-  "license": "proprietary",
+  "name": "pouzor/mongodbbundle",
+  "description": "Bundle with new Mongo 3.x version driver",
+  "license": "MIT",
   "type": "symfony-bundle",
   "keywords": ["mongo", "mongodb"],
   "authors": [

@@ -119,9 +119,8 @@ class DocumentManager
              * lazy creation
              */
             $repo = new Repository(
-                $this->database->selectCollection($name),
-                $this->logger,
-                $this->transformers
+                $name,
+                $this
             );
 
             if (isset($this->configuration['schema'][$name]['indexes'])) {
@@ -208,5 +207,27 @@ class DocumentManager
         }
     }
 
+    /**
+     * @return Database
+     */
+    public function getDatabase() {
 
+        return $this->database;
+    }
+
+    /**
+     * @return LoggerInterface|NullLogger
+     */
+    public function getLogger() {
+
+        return $this->logger;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTransformers() {
+
+        return $this->transformers;
+    }
 }

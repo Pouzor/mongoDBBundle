@@ -1,5 +1,5 @@
-parameters:
-    mongo_port: 27017
-
 services:
-  #
+  mongodbbundle.repository:
+    abstract: true
+    class: Pouzor\MongoDBBundle\Repository\Repository
+

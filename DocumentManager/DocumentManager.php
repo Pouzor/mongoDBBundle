@@ -70,20 +70,22 @@ class DocumentManager
 
         if ($configuration['username']) {
             $dsn = sprintf(
-                'mongodb://%s:%s@%s:%s/%s',
+                'mongodb://%s:%s@%s:/%s',
                 $configuration['username'],
                 $configuration['password'],
                 $configuration['host'],
-                $configuration['port'],
                 $configuration['db']
             );
         } else {
             $dsn = sprintf(
-                'mongodb://%s:%s/%s',
+                'mongodb://%s/%s',
                 $configuration['host'],
-                $configuration['port'],
                 $configuration['db']
             );
+        }
+
+        if (isset($configuration['options']['replicaSet']) && $configuration['options']['replicaSet']) {
+            $dsn .= "?replicaSet=".$configuration['options']['replicaSet'];
         }
 
         $this->client = new Client(
@@ -177,7 +179,7 @@ class DocumentManager
         /**
          * validating keys
          */
-        foreach (['host', 'port', 'db', 'password', 'username', 'schema', 'options'] as $key) {
+        foreach (['host', 'db', 'password', 'username', 'schema', 'options'] as $key) {
             if (!array_key_exists($key, $configuration)) {
                 throw new \Exception(sprintf('%s must be present in configuration', $key));
             }
@@ -187,10 +189,6 @@ class DocumentManager
             if (!is_string($configuration[$key]) || empty($configuration[$key])) {
                 throw new \Exception(sprintf('%s must be a not empty string', $key));
             }
-        }
-
-        if (!is_integer($configuration['port'])) {
-            throw new \Exception(sprintf('%s must be an integer', 'port'));
         }
 
     }

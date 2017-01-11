@@ -84,8 +84,8 @@ class DocumentManager
             );
         }
 
-        if ($configuration['replicaSet']) {
-            $dsn .= "?replicaSet=".$configuration['replicaSet'];
+        if ($configuration['options']['replicaSet']) {
+            $dsn .= "?replicaSet=".$configuration['options']['replicaSet'];
         }
 
         $this->client = new Client(
@@ -190,7 +190,7 @@ class DocumentManager
                 throw new \Exception(sprintf('%s must be a not empty string', $key));
             }
         }
-        
+
     }
 
     /**

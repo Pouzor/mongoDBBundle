@@ -74,11 +74,9 @@ class Repository
      * @param array $options
      * @param null $callback
      */
-    public function ensureIndex($fields, array $options = [], $rebuild = false, $callback = null)
+    public function ensureIndex($fields, array $options = ['maxTimeMS' => 0], $rebuild = false, $callback = null)
     {
         $this->logger->info('Creating index with fields ', $fields);
-
-       // $options += ['maxTimeMS' => -1];
 
         try {
             $name = $this->collection->createIndex($fields, $options);
@@ -241,11 +239,9 @@ class Repository
      * @param array $options
      * @return \MongoDB\Driver\Cursor
      */
-    public function findBy(array $query = [], array $options = [])
+    public function findBy(array $query = [], array $options = ['maxTimeMS' => 0])
     {
         $this->validateQueryOptions($options);
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Find many by',
@@ -266,11 +262,9 @@ class Repository
      * @param array $options
      * @return \MongoDB\Driver\Cursor
      */
-    public function findOneBy(array $filter = [], array $options = [])
+    public function findOneBy(array $filter = [], array $options = ['maxTimeMS' => 0])
     {
         $this->validateQueryOptions($options);
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Find one ',
@@ -289,11 +283,9 @@ class Repository
      * @param array $options
      * @return null|object
      */
-    public function find($id, array $options = [])
+    public function find($id, array $options = ['maxTimeMS' => 0])
     {
         $this->validateQueryOptions($options);
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Mongo find by id',
@@ -521,11 +513,9 @@ class Repository
      * @param array $options
      * @return int
      */
-    public function countBetween($field, $min = null, $max = null, array $options = [])
+    public function countBetween($field, $min = null, $max = null, array $options = ['maxTimeMS' => 0])
     {
         $query = [$field => ['$gt' => $min, '$lte' => $max]];
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Counting  ' . $field,
@@ -559,11 +549,9 @@ class Repository
      * @param array $options
      * @return mixed
      */
-    public function max($field, array $query = [], array $options = [])
+    public function max($field, array $query = [], array $options = ['maxTimeMS' => 0])
     {
         $this->validateQueryOptions($options);
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             sprintf('Maximum value in field %s', $field),
@@ -598,11 +586,9 @@ class Repository
      * @param array $options
      * @return \Traversable
      */
-    public function min($field, array $query = [], array $options = [])
+    public function min($field, array $query = [], array $options = ['maxTimeMS' => 0])
     {
         $this->validateQueryOptions($options);
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             sprintf('Minimum value in field %s', $field),
@@ -634,10 +620,8 @@ class Repository
      * @param array $options
      * @return \mixed[]
      */
-    public function distinct($field, array $filter = [], array $options = [])
+    public function distinct($field, array $filter = [], array $options = ['maxTimeMS' => 0])
     {
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Distinct over ' . $field,
@@ -657,10 +641,8 @@ class Repository
      * @param array $options
      * @return int
      */
-    public function count(array $filter = [], array $options = [])
+    public function count(array $filter = [], array $options = ['maxTimeMS' => 0])
     {
-
-        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Counting ',

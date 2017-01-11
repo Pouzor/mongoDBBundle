@@ -179,7 +179,7 @@ class DocumentManager
         /**
          * validating keys
          */
-        foreach (['host', 'port', 'db', 'password', 'username', 'schema', 'options'] as $key) {
+        foreach (['host', 'db', 'password', 'username', 'schema', 'options'] as $key) {
             if (!array_key_exists($key, $configuration)) {
                 throw new \Exception(sprintf('%s must be present in configuration', $key));
             }
@@ -190,11 +190,7 @@ class DocumentManager
                 throw new \Exception(sprintf('%s must be a not empty string', $key));
             }
         }
-
-        if (!is_integer($configuration['port'])) {
-            throw new \Exception(sprintf('%s must be an integer', 'port'));
-        }
-
+        
     }
 
     /**

@@ -78,7 +78,7 @@ class Repository
     {
         $this->logger->info('Creating index with fields ', $fields);
 
-        $options += ['socketTimeoutMS' => -1];
+       // $options += ['maxTimeMS' => -1];
 
         try {
             $name = $this->collection->createIndex($fields, $options);
@@ -111,6 +111,8 @@ class Repository
      */
     public function buildIndexes($rebuild = false, $callback = null)
     {
+        echo $this->name;
+
         if ($rebuild) {
             $this->collection->dropIndexes();
         }
@@ -243,7 +245,7 @@ class Repository
     {
         $this->validateQueryOptions($options);
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Find many by',
@@ -268,7 +270,7 @@ class Repository
     {
         $this->validateQueryOptions($options);
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Find one ',
@@ -291,7 +293,7 @@ class Repository
     {
         $this->validateQueryOptions($options);
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Mongo find by id',
@@ -523,7 +525,7 @@ class Repository
     {
         $query = [$field => ['$gt' => $min, '$lte' => $max]];
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Counting  ' . $field,
@@ -561,7 +563,7 @@ class Repository
     {
         $this->validateQueryOptions($options);
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             sprintf('Maximum value in field %s', $field),
@@ -600,7 +602,7 @@ class Repository
     {
         $this->validateQueryOptions($options);
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             sprintf('Minimum value in field %s', $field),
@@ -635,7 +637,7 @@ class Repository
     public function distinct($field, array $filter = [], array $options = [])
     {
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Distinct over ' . $field,
@@ -658,7 +660,7 @@ class Repository
     public function count(array $filter = [], array $options = [])
     {
 
-        $options += ['socketTimeoutMS' => -1];
+        $options += ['maxTimeMS' => -1];
 
         $this->logger->info(
             'Counting ',

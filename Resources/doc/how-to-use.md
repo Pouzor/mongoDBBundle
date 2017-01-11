@@ -75,3 +75,64 @@ The main advantage of the new mongo version is the facilities to create batch mu
     //...
 
 ```
+
+## Repository as Service
+
+You can declare Repository class as service, in order to store custom request or inject only repository instead of the whole manager.
+
+Example :
+
+```yml
+#services.yml
+
+parameters:
+#Declare the name of the mongo collection
+    user_collection_name: "User"
+
+services:
+    app.repository.user:
+        parent: mongodbbundle.repository
+        class: AppBundle\Repository\UserRepository
+        arguments: ["%user_collection_name%", "@document.manager"]
+
+```
+
+Then the repository class:
+
+```php
+
+<?php
+//AppBundle\Repository\UserRepository.php
+namespace AppBundle\Repository;
+
+use Pouzor\MongoDBBundle\Repository\Repository;
+
+/**
+ * Class UserRepository
+ * @package AppBundle\Repository
+ */
+class UserRepository extends Repository {
+
+    public function findOneByEmail($email) {
+
+        return $this->findOneBy(["email" => $email, "activated" => true], []);
+    }
+}
+
+
+```
+
+So you can easily inject in your project class :
+
+```yml
+#services.yml
+
+services:
+    app.command.my_command:
+        class: AppBundle\Command\IngestUserCommand
+        calls:
+          - [setUserRepository, ["@app.repository.user"]]
+        tags:
+            - { name: console.command }
+
+```

@@ -50,21 +50,23 @@ class Repository
     private $transformers = [];
 
     /**
-     * @param Collection $collection
-     * @param LoggerInterface|null $logger
-     * @param array $transformers
+     * Repository constructor.
+     * @param $name
+     * @param $manager
      */
-    public function __construct(Collection $collection, LoggerInterface $logger = null, array $transformers = [])
+    public function __construct($name, $manager)
     {
-        $this->collection = $collection;
 
-        $this->name = $this->collection->getCollectionName();
+        $this->collection = $manager->getDatabase()->selectCollection($name);
 
-        $this->logger = $logger ?: new NullLogger();
+        $this->name = $name;
 
-        $this->transformers = $transformers;
+        $this->logger = $manager->getLogger() ?: new NullLogger();
+
+        $this->transformers = $manager->getTransformers();
 
         $this->persistence = [];
+
     }
 
     /**

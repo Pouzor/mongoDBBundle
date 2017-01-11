@@ -84,7 +84,7 @@ class DocumentManager
             );
         }
 
-        if ($configuration['options']['replicaSet']) {
+        if (isset($configuration['options']['replicaSet']) && $configuration['options']['replicaSet']) {
             $dsn .= "?replicaSet=".$configuration['options']['replicaSet'];
         }
 

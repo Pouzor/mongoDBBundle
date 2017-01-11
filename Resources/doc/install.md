@@ -26,21 +26,38 @@ mongo_db:
     default_connection:   master
     connections:
         master:
-            host:          %mongo_host%
-            port:          %mongo_port%
+            host:          %mongo_host%:%mongo_port%
             db:            %mongo_database%
             password:      %mongo_password%
             username:      %mongo_user%
             schema:        "%kernel.root_dir%/config/mongo/default.yml"
             options:       ~
         backup:
-            host:          %mongo_host_backup%
-            port:          %mongo_port%
+            host:          %mongo_host_backup%:%mongo_port%
             db:            %mongo_database%
             password:      %mongo_password%
             username:      %mongo_user%
             schema:        "%kernel.root_dir%/config/mongo/default.yml"
             options:       ~
+
+```
+
+For using with replicaSet, you need to complete the host field with list of your host, comma separated, and the name of your replicaSet
+
+```yaml
+
+#config.yml
+mongo_db:
+    default_connection:   master
+    connections:
+        master:
+            host:          "localhost:27017,localhost:27018,localhost:27019"
+            db:            %mongo_database%
+            password:      %mongo_password%
+            username:      %mongo_user%
+            schema:        "%kernel.root_dir%/config/mongo/default.yml"
+            options:
+                replicaSet:    "res0"
 
 ```
 

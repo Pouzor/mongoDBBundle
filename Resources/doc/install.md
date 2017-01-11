@@ -58,6 +58,7 @@ mongo_db:
             schema:        "%kernel.root_dir%/config/mongo/default.yml"
             options:
                 replicaSet:    "res0"
+                readPreference: "secondaryPreferred"                
 
 ```
 

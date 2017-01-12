@@ -70,7 +70,7 @@ class DocumentManager
 
         if ($configuration['username']) {
             $dsn = sprintf(
-                'mongodb://%s:%s@%s:/%s',
+                'mongodb://%s:%s@%s/%s',
                 $configuration['username'],
                 $configuration['password'],
                 $configuration['host'],

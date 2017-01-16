@@ -11,11 +11,14 @@
     }
   ],
   "autoload": {
-    "psr-4": { "Pouzor\\MongoDBBundle\\": "" }
+    "psr-4": { "Pouzor\\MongoDBBundle\\": "" },
+    "exclude-from-classmap": [
+      "Tests/"
+    ]
   },
   "require": {
     "php": ">=5.4.0",
-    "mongodb/mongodb" : "^1.1.0"
+    "mongodb/mongodb" : "^1.2.0"
   },
   "minimum-stability": "dev",
   "require-dev": {

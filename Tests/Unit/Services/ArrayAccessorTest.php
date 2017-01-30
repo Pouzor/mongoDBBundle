@@ -44,6 +44,9 @@ class ArrayAccessorTest extends \PHPUnit_Framework_TestCase
         $result = ArrayAccessor::dget($arraytest, "person.foo", "bar");
         $this->assertEquals($result, 'bar');
 
+        $result = ArrayAccessor::dget($arraytest, "person.childs.0.name", "bar");
+        $this->assertEquals($result, 'victor');
+
     }
 
 }

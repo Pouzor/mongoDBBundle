@@ -33,8 +33,8 @@ class ArrayAccessor
      * array(
      *      'person' => [
      *           'name' => 'john',
-     *           'lastname'='smith',
-     *           'childs': [
+     *           'lastname' => 'smith',
+     *           'childs' => [
      *               [ 'name' => 'victor'],
      *               [ 'name' => 'david']
      *           ]

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pouzor\MongoDBBundle\Tests\Unit\Controller;
+namespace Pouzor\MongoDBBundle\Tests\Unit\DocumentManager;
 
 use Pouzor\MongoDBBundle\DocumentManager\DocumentManager;
 use Psr\Log\NullLogger;

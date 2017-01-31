@@ -5,9 +5,10 @@ namespace Pouzor\MongoDBBundle\Tests\Unit\DocumentManager;
 use Pouzor\MongoDBBundle\DocumentManager\DocumentManager;
 use Psr\Log\NullLogger;
 
-class DocumentManagerTest extends \PHPUnit_Framework_TestCase
+class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     private $manager = null;
+    private $repository = null;
 
     private $config = [
         "db" => "mongodbbundle",
@@ -23,6 +24,7 @@ class DocumentManagerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new NullLogger();
         $this->manager = new DocumentManager($this->config, $logger);
+        $this->repository = $this->manager->getRepository("Foo");
     }
 
     protected function tearDown()
@@ -32,10 +34,11 @@ class DocumentManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRepository()
     {
-        $repository = $this->manager->getRepository("Foo");
-        $this->assertEquals(get_class($repository), 'Pouzor\MongoDBBundle\Repository\Repository');
 
+        $this->assertEquals(get_class($this->repository), 'Pouzor\MongoDBBundle\Repository\Repository');
+        $this->assertEquals("Foo", $this->repository->getName());
 
+        $this->repository->getIndexes();
     }
 
 

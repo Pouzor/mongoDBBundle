@@ -35,7 +35,7 @@ final class Query
      * Faster when you are pulling down a lot of data and you know
      * you want to retrieve it all
      */
-    const EXHAUST  = 'exhaust';
+    const EXHAUST = 'exhaust';
 
     /**
      * Block rather than returning no data. After a period, time out.
@@ -76,18 +76,19 @@ final class Query
     {
         $dateClass = DriverClasses::DATE_CLASS;
 
-        if(!$time)
+        if (!$time) {
             return new $dateClass(microtime() * 1000);
+        }
 
-        if(is_int($time)){
+        if (is_int($time)) {
             return new $dateClass($time * 1000);
         }
 
+        if (strtotime($time) === false) {
+            throw new \Exception('Invalid time');
+        }
 
-        if(strtotime($time) === -1)
-            throw new \Exception('Invalid time ');
-
-        $utime = (new \DateTime($time))->format('U');
+        $utime = (new \DateTime($time));
 
         return new $dateClass($utime);
     }

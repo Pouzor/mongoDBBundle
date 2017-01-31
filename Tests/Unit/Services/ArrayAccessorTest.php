@@ -130,8 +130,7 @@ class ArrayAccessorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(ArrayAccessor::get_key_exist($arraytest, "person"), 'john');
         $this->assertEquals(ArrayAccessor::get_key_exist($arraytest, "work", 'nope'), 'nope');
-
-
+        
     }
 
 }

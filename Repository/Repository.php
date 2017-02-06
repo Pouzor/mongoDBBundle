@@ -779,12 +779,14 @@ class Repository
         $this->indexes = $indexes;
     }
 
-    public function getIndexes() {
+    public function getIndexes()
+    {
 
         return $this->indexes;
     }
 
-    public function getName() {
+    public function getName()
+    {
 
         return $this->name;
     }

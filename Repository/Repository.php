@@ -393,7 +393,7 @@ class Repository
     }
 
     /**
-     * Update many documents at the same time
+     * Update one documents (the whole document)
      *
      * @param array $where
      * @param array $modifications

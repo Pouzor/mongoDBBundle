@@ -470,6 +470,7 @@ class Repository
     }
 
     /**
+     * Aggregation function for mongoDB
      * @param array $pipelines
      * @param array $options
      * @return \Traversable

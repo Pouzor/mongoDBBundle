@@ -67,19 +67,19 @@ Then, add the file ```app/config/mongo/default.yml```. This file is used to buil
 
 ```
 #app/config/mongo/default/yml
-Game:
+MyCollection:
     fields: ~
     indexes:
-        uuid: 1
-        source_id:
+        my_field: 1 #index with same name than field
+        my_specific_index: #index name on one or more field
             fields:
-                source: 1
-                idExt: 1
-                uuid: 1
+                my_field_2: 1
+                my_field_3: 1
+                my_field_4: -1
             options:
                 unique: true
                 sparse: false
-        idExt: -1
-        source: 1
+        my_field_5: -1
+        my_field_6: 1
 ```
 

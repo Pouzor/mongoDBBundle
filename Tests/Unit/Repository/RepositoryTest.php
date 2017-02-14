@@ -89,7 +89,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->repository->count());
     }
 
-    public function testUpdateMany() {
+    public function testUpdateMany()
+    {
         $datas = [
             [
                 "name" => "foo",
@@ -113,7 +114,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testReplaceOne() {
+    public function testReplaceOne()
+    {
         $datas = [
             [
                 "name" => "foo",
@@ -136,7 +138,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->repository->count(["name" => "foo", "value" => 5]));
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $data = [
             "name" => "foo",
             "value" => 1
@@ -154,7 +157,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testDeleteOne() {
+    public function testDeleteOne()
+    {
         $datas = [
             [
                 "name" => "foo",
@@ -177,7 +181,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->repository->count(['name' => 'foo']));
     }
 
-    public function testDeleteMany() {
+    public function testDeleteMany()
+    {
         $datas = [
             [
                 "name" => "foo",
@@ -198,6 +203,88 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->repository->deletemany(['name' => 'foo']);
         $this->assertEquals(0, $this->repository->count(['name' => 'foo']));
+    }
+
+    public function testAggregate()
+    {
+        $datas = [
+            [
+                "name" => "foo",
+                "value" => 1
+            ],
+            [
+                "name" => "bar",
+                "value" => 2
+            ],
+            [
+                "name" => "foo",
+                "value" => 3
+            ]
+        ];
+
+        $this->repository->insertMany($datas);
+
+        $result = $this->repository->aggregate(
+            [
+                [
+                    '$match' => [
+                        "name" => "bar"
+                    ]
+                ]
+            ]
+        );
+
+        $this->assertCount(1, $result->toArray());
+    }
+
+    public function testMin() {
+        $datas = [
+            [
+                "name" => "foo",
+                "value" => 10
+            ],
+            [
+                "name" => "bar",
+                "value" => 5
+            ],
+            [
+                "name" => "foo",
+                "value" => 30
+            ]
+        ];
+
+        $this->repository->insertMany($datas);
+
+        $result = $this->repository->min("value");
+        $this->assertEquals(5, $result);
+
+        $result = $this->repository->min("value", ["name" => "foo"]);
+        $this->assertEquals(10, $result);
+    }
+
+    public function testMax() {
+        $datas = [
+            [
+                "name" => "foo",
+                "value" => 10
+            ],
+            [
+                "name" => "bar",
+                "value" => 5
+            ],
+            [
+                "name" => "foo",
+                "value" => 30
+            ]
+        ];
+
+        $this->repository->insertMany($datas);
+
+        $result = $this->repository->max("value");
+        $this->assertEquals(30, $result);
+
+        $result = $this->repository->max("value", ["name" => "bar"]);
+        $this->assertEquals(5, $result);
     }
 
 }

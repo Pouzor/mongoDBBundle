@@ -1,1 +1,4 @@
-# Created by .ignore support plugin (hsz.mobi)
+/vendor
+/tests/App/cache
+/tests/App/logs
+/build

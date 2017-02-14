@@ -393,7 +393,7 @@ class Repository
     }
 
     /**
-     * Update many documents at the same time
+     * Update one documents (the whole document)
      *
      * @param array $where
      * @param array $modifications
@@ -470,6 +470,7 @@ class Repository
     }
 
     /**
+     * Aggregation function for mongoDB
      * @param array $pipelines
      * @param array $options
      * @return \Traversable
@@ -779,5 +780,15 @@ class Repository
         $this->indexes = $indexes;
     }
 
+    public function getIndexes()
+    {
 
+        return $this->indexes;
+    }
+
+    public function getName()
+    {
+
+        return $this->name;
+    }
 }

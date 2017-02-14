@@ -1,0 +1,10 @@
+parameters:
+    configuration:
+      mongo_database: mongodbbundle
+      mongo_host: localhost
+      mongo_port: 27017
+      mongo_user: null
+      mongo_password: null
+
+framework:
+    secret: This is a secret, change me

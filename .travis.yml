@@ -9,7 +9,9 @@ php:
   - '7.0'
   - '7.1'
 
-before_install: phpenv config-add travis.ini
+before_install:
+  - phpenv config-add travis.ini
+  - pecl install -f mongodb-1.2.2
 
 before_script:
   - composer install -v

@@ -234,6 +234,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
+        $result->setTypeMap(['root' => 'array']);
         $this->assertCount(1, $result->toArray());
     }
 

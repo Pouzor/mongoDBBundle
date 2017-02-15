@@ -77,7 +77,7 @@ final class Query
         $dateClass = DriverClasses::DATE_CLASS;
 
         if (!$time) {
-            return new $dateClass(microtime() * 1000);
+            return new $dateClass(time() * 1000);
         }
 
         if (is_int($time)) {

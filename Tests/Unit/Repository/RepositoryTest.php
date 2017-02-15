@@ -234,8 +234,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $result->setTypeMap(['root' => 'array']);
-        $this->assertCount(1, $result->toArray());
+        $i = 0;
+        //In specific version of mongodb driver, $result->toArray() doesn't work, nor count
+        foreach ($result as $data) {
+            $i++;
+        }
+
+        $this->assertEquals(1, $i);
+
     }
 
     public function testMin() {

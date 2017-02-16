@@ -8,3 +8,8 @@ parameters:
 
 framework:
     secret: This is a secret, change me
+    test: ~
+
+services:
+    document.manager:
+      class: Pouzor\MongoDBBundle\DocumentManager

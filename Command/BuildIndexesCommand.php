@@ -14,6 +14,9 @@ use Symfony\Component\Yaml\Yaml;
 
 class BuildIndexesCommand extends ContainerAwareCommand
 {
+
+    private $manager;
+
     /**
      * {@inheritdoc}
      */
@@ -36,17 +39,20 @@ class BuildIndexesCommand extends ContainerAwareCommand
         $rebuild = $input->getOption('rebuild');
         $collection = $input->getOption('collection');
 
-        $manager = $this->getContainer()->get('document.manager');
-
         $callback = function ($name) use ($style) {
             $style->comment(sprintf('%s : Ok', $name));
         };
 
         if ($collection) {
-            $manager->getRepository($collection)->buildIndexes($callback);
+            $this->manager->getRepository($collection)->buildIndexes($callback);
         } else {
-            $manager->buildIndexes($rebuild, $callback);
+            $this->manager->buildIndexes($rebuild, $callback);
         }
 
+    }
+
+    public function setManager($manager) {
+
+        $this->manager = $manager;
     }
 }

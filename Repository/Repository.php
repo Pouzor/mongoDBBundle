@@ -97,6 +97,15 @@ class Repository
 
     }
 
+    public function dropIndexes()
+    {
+        try {
+            $this->collection->dropIndexes();
+        } catch (\MongoDB\Driver\Exception\RuntimeException $e) {
+            //Collection doesn't exist yet
+        }
+    }
+
     /**
      * @param null $callback
      */
@@ -133,7 +142,7 @@ class Repository
     {
         return count($this->persistence);
     }
-    
+
     /**
      * Persist a document
      *
@@ -758,6 +767,11 @@ class Repository
                 throw new MalformedOperationException(sprintf('%s argument must be an array'));
             }
         }
+    }
+
+    public function listIndexes($options = []) {
+
+        return $this->collection->listIndexes($options);
     }
 
     public function setIndexes(array $indexes)

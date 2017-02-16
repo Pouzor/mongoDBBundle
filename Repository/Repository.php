@@ -43,7 +43,7 @@ class Repository
 
 
     private $persistence = [];
-    
+
     /**
      * Repository constructor.
      * @param $name
@@ -97,15 +97,27 @@ class Repository
 
     }
 
+    public function dropIndexes()
+    {
+        try {
+            $this->collection->dropIndexes();
+        } catch (\MongoDB\Driver\Exception\RuntimeException $e) {
+            //Collection doesn't exist yet
+        }
+    }
+
     /**
      * @param null $callback
      */
     public function buildIndexes($rebuild = false, $callback = null)
     {
-        echo $this->name;
 
         if ($rebuild) {
-            $this->collection->dropIndexes();
+            try {
+                $this->collection->dropIndexes();
+            } catch (\MongoDB\Driver\Exception\RuntimeException $e) {
+                //Collection doesn't exist yet
+            }
         }
 
         foreach ($this->indexes as $name => $conf) {
@@ -130,7 +142,7 @@ class Repository
     {
         return count($this->persistence);
     }
-    
+
     /**
      * Persist a document
      *
@@ -755,6 +767,11 @@ class Repository
                 throw new MalformedOperationException(sprintf('%s argument must be an array'));
             }
         }
+    }
+
+    public function listIndexes($options = []) {
+
+        return $this->collection->listIndexes($options);
     }
 
     public function setIndexes(array $indexes)

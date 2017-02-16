@@ -1,5 +1,11 @@
 services:
-  mongodbbundle.repository:
-    abstract: true
-    class: Pouzor\MongoDBBundle\Repository\Repository
+    mongodbbundle.repository:
+        abstract: true
+        class: Pouzor\MongoDBBundle\Repository\Repository
 
+    mongodbdundle.command.buildIndexes:
+        class: Pouzor\MongoDBBundle\Command\BuildIndexesCommand
+        calls:
+            - [ setManager, [ "@document.manager" ]]
+        tags:
+            - { name: console.command }

@@ -10,7 +10,7 @@
 >
 
     <php>
-        <server name="KERNEL_DIR" value="./tests/App/" />
+        <server name="KERNEL_DIR" value="./Tests/App/" />
     </php>
 
     <testsuites>

@@ -1,5 +1,6 @@
-Pouzor MongoDB Bundle [![Build Status](https://travis-ci.org/Pouzor/mongoDBBundle.svg?branch=master)](https://travis-ci.org/Pouzor/mongoDBBundle)
+Pouzor MongoDB Bundle
 =================
+[![Build Status](https://travis-ci.org/Pouzor/mongoDBBundle.svg?branch=master)](https://travis-ci.org/Pouzor/mongoDBBundle)
 
 MongoDBBundle is the easiest and fastest way to integrate MongoDB in your project with the new php driver (Support php >=5.4 and php 7.x). 
 

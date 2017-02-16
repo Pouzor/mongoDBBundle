@@ -43,12 +43,7 @@ class Repository
 
 
     private $persistence = [];
-
-    /**
-     * @var
-     */
-    private $transformers = [];
-
+    
     /**
      * Repository constructor.
      * @param $name
@@ -62,8 +57,6 @@ class Repository
         $this->name = $name;
 
         $this->logger = $manager->getLogger() ?: new NullLogger();
-
-        $this->transformers = $manager->getTransformers();
 
         $this->persistence = [];
 
@@ -762,17 +755,6 @@ class Repository
                 throw new MalformedOperationException(sprintf('%s argument must be an array'));
             }
         }
-    }
-
-    /**
-     * @param array $transformers
-     * @return $this
-     */
-    public function setTranformers(array $transformers = [])
-    {
-        $this->transformers = $transformers;
-
-        return $this;
     }
 
     public function setIndexes(array $indexes)

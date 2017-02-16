@@ -8,7 +8,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Pouzor\MongoDBBundle\Constants\Query;
 use Pouzor\MongoDBBundle\Repository\Repository;
-use Pouzor\MongoDBBundle\Types\MongoTransformerInterface;
 
 /**
  * Class DocumentManager
@@ -35,12 +34,7 @@ class DocumentManager
      * @var LoggerInterface
      */
     private $logger;
-
-    /**
-     * @var array
-     */
-    private $transformers = [];
-
+    
     /**
      * @var array
      */
@@ -98,14 +92,6 @@ class DocumentManager
         $this->database = $this->client->selectDatabase($configuration['db']);
 
         $this->logger = $logger ?: new NullLogger();
-    }
-
-    /**
-     * @param MongoTransformerInterface $transformer
-     */
-    public function addTransformer(MongoTransformerInterface $transformer)
-    {
-        $this->transformers[] = $transformer;
     }
 
     /**
@@ -219,11 +205,4 @@ class DocumentManager
         return $this->logger;
     }
 
-    /**
-     * @return array
-     */
-    public function getTransformers() {
-
-        return $this->transformers;
-    }
 }

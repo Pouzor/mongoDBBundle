@@ -693,7 +693,7 @@ class Repository
          *  offset
          */
         if (isset($options[Query::OFFSET]) && !is_integer($options[Query::OFFSET])) {
-            throw new \InvalidArgumentException(Query::OFFSET . ' option must be an array');
+            throw new \InvalidArgumentException(Query::OFFSET . ' option must be an integer');
         }
 
         // TODO validate other options

@@ -72,7 +72,7 @@ final class Query
      * @return MongoDB\BSON\UTCDateTime
      * @throws \Exception
      */
-    static function createDate($time = null)
+    public static function createDate($time = null)
     {
         $dateClass = DriverClasses::DATE_CLASS;
 

@@ -66,8 +66,6 @@ class DocumentManager
 
         $this->configuration = $configuration;
 
-        $dsn = null;
-
         if ($configuration['username']) {
             $dsn = sprintf(
                 'mongodb://%s:%s@%s/%s',
@@ -143,7 +141,7 @@ class DocumentManager
      */
     public function find($collection, $id, array $options = [])
     {
-        return $this->getRepository($collection)->find($id);
+        return $this->getRepository($collection)->find($id, $options);
     }
 
     /**

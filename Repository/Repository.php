@@ -137,13 +137,13 @@ class Repository
     {
         return count($this->persistence);
     }
-
-
+    
     /**
      * Persist a document
      *
      * @param $document
-     * @return null | BulkWriteResult
+     * @param bool $andFlush
+     * @return BulkWriteResult
      */
     public function persist($document, $andFlush = false)
     {
@@ -664,30 +664,30 @@ class Repository
     private function validateQueryOptions(array $options = [])
     {
         /**
-         * limit
+         * Sort
          */
-        if (isset($options[Query::SORT]) and !is_array($options[Query::SORT])) {
+        if (isset($options[Query::SORT]) && !is_array($options[Query::SORT])) {
             throw new \InvalidArgumentException(Query::SORT . ' option must be an array');
         }
 
         /**
-         * limit
+         * Proj
          */
-        if (isset($options[Query::PROJECTION]) and !is_array($options[Query::PROJECTION])) {
+        if (isset($options[Query::PROJECTION]) && !is_array($options[Query::PROJECTION])) {
             throw new \InvalidArgumentException(Query::PROJECTION . ' option must be an array');
         }
 
         /**
          *  limit
          */
-        if (isset($options[Query::LIMIT]) and !is_integer($options[Query::LIMIT])) {
+        if (isset($options[Query::LIMIT]) && !is_integer($options[Query::LIMIT])) {
             throw new \InvalidArgumentException(Query::LIMIT . " option must be an integer");
         }
 
         /**
-         *  limit
+         *  offset
          */
-        if (isset($options[Query::OFFSET]) and !is_integer($options[Query::OFFSET])) {
+        if (isset($options[Query::OFFSET]) && !is_integer($options[Query::OFFSET])) {
             throw new \InvalidArgumentException(Query::OFFSET . ' option must be an array');
         }
 
@@ -699,7 +699,7 @@ class Repository
      * @param $id
      * @return MongoDB\BSON\ObjectID
      */
-    static public function createObjectId($id)
+    public static function createObjectId($id)
     {
         $class = DriverClasses::ID_CLASS;
 

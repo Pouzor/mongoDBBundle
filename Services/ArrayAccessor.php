@@ -14,7 +14,7 @@ class ArrayAccessor
      * @param $key2
      * @return array
      */
-    static function replaceKey(&$array, $key1, $key2)
+    public static function replaceKey(&$array, $key1, $key2)
     {
         $keys = array_keys($array);
         $index = array_search($key1, $keys, true);
@@ -51,7 +51,7 @@ class ArrayAccessor
      * @param $default
      * @return array|null
      */
-    static function dget(array &$data, $path, $default = null)
+    public static function dget(array &$data, $path, $default = null)
     {
         $keys = explode('.', $path);
         foreach ($keys as $k) {
@@ -88,7 +88,7 @@ class ArrayAccessor
      * @param $path
      * @param $value
      */
-    static function dset(array &$data, $path, $value)
+    public static function dset(array &$data, $path, $value)
     {
         $keys = explode('.', $path);
         $last = array_pop($keys);
@@ -126,7 +126,7 @@ class ArrayAccessor
      * @param $path
      * @return int|null
      */
-    static function dcount(array &$data, $path)
+    public static function dcount(array &$data, $path)
     {
         $keys = explode('.', $path);
         $last = array_pop($keys);
@@ -173,7 +173,7 @@ class ArrayAccessor
      * @param array $data
      * @param $path
      */
-    static function ddel(array &$data, $path)
+    public static function ddel(array &$data, $path)
     {
         $keys = explode('.', $path);
         $last = array_pop($keys);
@@ -193,7 +193,7 @@ class ArrayAccessor
      * @param null $default
      * @return null
      */
-    static function get_key_exist($array, $key, $default = null) {
+    public static function get_key_exist($array, $key, $default = null) {
 
         if (isset($array[$key]))
             return $array[$key];

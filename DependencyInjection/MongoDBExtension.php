@@ -16,12 +16,12 @@ use Symfony\Component\Yaml\Yaml;
  * Class MongoDBExtension
  * @package Pouzor\MongoDBBundle\DependencyInjection
  */
-class MongoDBExtension  extends ConfigurableExtension
+class MongoDBExtension extends ConfigurableExtension
 {
     // note that this method is called loadInternal and not load
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
         foreach ($mergedConfig['connections'] as $name => $con) {
@@ -30,14 +30,15 @@ class MongoDBExtension  extends ConfigurableExtension
                 file_get_contents($con['schema'])
             );
 
-            $def = $container->register('document.manager.'.$name, DocumentManager::class);
-            $def->addTag('document.manager',[ 'name' => $name]);
+            $def = $container->register('document.manager.' . $name, DocumentManager::class);
+            $def->addTag('document.manager', ['name' => $name]);
             $def->setArguments([$con, new Reference('logger')]);
-            $def->addTag('monolog.logger', [ 'channel' => 'odm.mongo']);
+            $def->addTag('monolog.logger', ['channel' => 'odm.mongo']);
         }
 
-        if(isset($mergedConfig['default_connection']) and $container->hasDefinition('document.manager.'.$mergedConfig['default_connection'])){
-            $container->setAlias('document.manager', 'document.manager.'.$mergedConfig['default_connection']);
+        if (isset($mergedConfig['default_connection']) && $container->hasDefinition(
+                'document.manager.' . $mergedConfig['default_connection'])) {
+            $container->setAlias('document.manager', 'document.manager.' . $mergedConfig['default_connection']);
         }
     }
 }
